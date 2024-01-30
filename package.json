@@ -13,9 +13,14 @@
   "author": "Jan Libal",
   "license": "ISC",
   "devDependencies": {
+    "@types/dotenv-parse-variables": "^2.0.3",
     "@types/jest": "^29.5.11",
     "jest": "^29.7.0",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2"
+  },
+  "dependencies": {
+    "dotenv-extended": "^2.9.0",
+    "dotenv-parse-variables": "^2.0.0"
   }
 }
