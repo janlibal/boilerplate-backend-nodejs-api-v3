@@ -6,6 +6,7 @@ import koaHelmet  from 'koa-helmet'
 import cors from '@koa/cors'
 import koaLogger from 'koa-logger'
 import errorHandler from '../middleware/errorHandler'
+import router from '../routes'
 
 
 const app = new Koa()
@@ -21,5 +22,7 @@ app.use(
   }),
 )
 app.use(koaHelmet())
+app.use(router.routes())
+app.use(router.allowedMethods())
 
 export default app
