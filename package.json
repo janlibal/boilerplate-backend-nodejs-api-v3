@@ -11,6 +11,7 @@
     "eslint": "^7 || ^8"
   },
   "scripts": {
+    "dev": "cross-env ENV_FILE=./src/config/env/.env.dev nodemon",
     "lint:check": "eslint --ext ts --report-unused-disable-directives .",
     "test": "cross-env ENV_FILE=./src/config/env/.env.test jest --detectOpenHandles"
   },
@@ -22,6 +23,11 @@
     "@strv/eslint-config-typescript": "^4.1.2",
     "@types/dotenv-parse-variables": "^2.0.3",
     "@types/jest": "^29.5.11",
+    "@types/koa__cors": "^5.0.0",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-compress": "^4.0.6",
+    "@types/koa-logger": "^3.1.5",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -33,9 +39,16 @@
     "ts-jest": "^29.1.2"
   },
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "cross-env": "^7.0.3",
     "dotenv-extended": "^2.9.0",
     "dotenv-parse-variables": "^2.0.0",
+    "koa": "^2.15.0",
+    "koa-body": "^6.0.1",
+    "koa-bodyparser": "^4.4.1",
+    "koa-compress": "^5.1.1",
+    "koa-helmet": "^7.0.2",
+    "koa-logger": "^3.2.1",
     "pino": "^8.17.2"
   },
   "eslintConfig": {
