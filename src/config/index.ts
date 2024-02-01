@@ -22,6 +22,7 @@ const config: IConfig = {
     pinoMinLevel: parsedEnv.PINO_MIN_LEVEL as string,
     pinoEnabled: parsedEnv.PINO_ENABLED as boolean,
     server: {
+        logPath: parsedEnv.LOGS as string,
         port: parsedEnv.PORT as string,
         environment: parsedEnv.ENVIRONMENT as string,
         bodyParser: {

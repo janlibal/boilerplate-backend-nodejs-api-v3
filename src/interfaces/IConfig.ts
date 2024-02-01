@@ -2,6 +2,7 @@ export interface IConfig {
     appName: string
     nodeVer: string
         server: {
+            logPath: string,
             port: string,
             environment: string,
             bodyParser: {

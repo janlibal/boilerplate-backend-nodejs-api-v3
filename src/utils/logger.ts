@@ -6,7 +6,9 @@ const transport = pino.transport({
   targets: [
     {
       target: 'pino/file',
-      options: { destination: `${__dirname}/../../logs/server.log` },
+      //options: { destination: `${__dirname}/../../logs/server.log` },
+      //options: { destination: '/home/node/server.log' },
+      options: { destination: config.server.logPath },
     },
     {
       target: 'pino-pretty',
