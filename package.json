@@ -29,6 +29,8 @@
     "@types/koa-compress": "^4.0.6",
     "@types/koa-logger": "^3.1.5",
     "@types/koa-router": "^7.4.8",
+    "@types/lodash": "^4.14.202",
+    "@types/pg": "^8.11.0",
     "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
@@ -53,6 +55,9 @@
     "koa-helmet": "^7.0.2",
     "koa-logger": "^3.2.1",
     "koa-router": "^12.0.1",
+    "lodash": "^4.17.21",
+    "objection": "^3.1.3",
+    "pg": "^8.11.3",
     "pino": "^8.17.2",
     "typescript": "^5.3.3"
   },
