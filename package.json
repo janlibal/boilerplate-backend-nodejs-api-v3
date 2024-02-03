@@ -48,6 +48,7 @@
     "cross-env": "^7.0.3",
     "dotenv-extended": "^2.9.0",
     "dotenv-parse-variables": "^2.0.0",
+    "jsonschema": "^1.4.1",
     "koa": "^2.15.0",
     "koa-body": "^6.0.1",
     "koa-bodyparser": "^4.4.1",
