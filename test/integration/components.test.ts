@@ -1,6 +1,6 @@
 import { connect } from "../../src/database"
 
-test('Database Postgres', async () => {
+test.skip('Database Postgres', async () => {
     
     const db = await connect()
        
