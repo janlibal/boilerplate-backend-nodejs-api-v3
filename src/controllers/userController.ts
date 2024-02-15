@@ -1,3 +1,5 @@
+import validate from "../validations"
+import schema from '../validations/schemas/userSchema'
 import { IContext } from "../interfaces/IContext"
 import { IUser } from "../interfaces/IUser"
 
@@ -11,7 +13,8 @@ export async function signUp(ctx: IContext){
         password: ctx.request.body.password
     }
 
-   
+    validate(schema.signUp, input)
+    
     ctx.body = {
         status: 'success',
         data: input
