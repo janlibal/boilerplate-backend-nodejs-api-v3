@@ -28,10 +28,10 @@ async function create(input: IUser) {
        
     const token = await crypto.generateAccessToken(createdUser.id)
             
-    logger.info({user: createdUser, token: token}, 'create user finished')
+    logger.info({email: createdUser.email, token: token}, 'create user finished')
             
     return {
-        user: createdUser,
+        email: createdUser.email,
         token
     }
     
