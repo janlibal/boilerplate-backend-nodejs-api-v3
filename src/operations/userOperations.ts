@@ -13,7 +13,7 @@ async function create(input: IUser) {
     const data = {
         email: input.email,
         name: input.name,
-        password: input.password,
+        password: await crypto.hashPassword(input.password),
     }
 
     const user = await userRepository.findByEmail(data.email)
