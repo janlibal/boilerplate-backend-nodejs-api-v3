@@ -18,7 +18,7 @@ describe('GET /', () => {
           .expect('Content-Type', /json/)
           .expect(200)
   
-        const info = res.body;
+        const info = res.body
         const expected = ['status', 'message']
         expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
         expect(info.status).toBe('success')
