@@ -14,6 +14,7 @@ export async function signUp(ctx: IContext){
     }
 
     validate(schema.signUp, input)
+  
     
     ctx.body = {
         status: 'success',

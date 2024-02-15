@@ -32,6 +32,9 @@ describe('POST /api/v1/user', () => {
       .send(userData)
       .expect('Content-Type', /json/)
       .expect(200)
+      const info = res.body
+      const expected = ['status', 'data']
+      expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
   })
 })
 
