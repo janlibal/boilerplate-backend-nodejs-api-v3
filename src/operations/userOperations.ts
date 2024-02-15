@@ -22,12 +22,12 @@ async function create(input: IUser) {
       logger.info('Resource already exists')
       throw new errors.ResourceAlreadyExists()
     }
-    
+
     let createdUser: any
     createdUser = await userRepository.saveUser(data)
-   
+       
     const token = await crypto.generateAccessToken(createdUser.id)
-   
+            
     logger.info({user: createdUser, token: token}, 'create user finished')
             
     return {

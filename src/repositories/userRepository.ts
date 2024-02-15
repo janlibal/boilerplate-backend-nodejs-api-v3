@@ -8,11 +8,8 @@ async function findByEmail(email: string) {
 }
 
 async function saveUser(attributes:IUser) {
-    const user = {
-        id: '550e8400-e29b-41d4-a716-446655440000',
-        email: attributes.email
-    }
-
+    let user: any
+    user = await User.query().insertAndFetch(attributes)
     return user
 }
 
