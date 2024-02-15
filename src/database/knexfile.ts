@@ -20,7 +20,7 @@ const knexConfig = {
     },
     development: {
         client: 'pg',
-        connection: 'postgres://root:root@127.0.0.1:5432/boilerplate-v2-dev',
+        connection: 'postgres://root:root@127.0.0.1:5432/boilerplate-v3-dev',
         migrations: {
             directory: path.join(BASE_PATH, 'migrations'),
         },
@@ -30,7 +30,7 @@ const knexConfig = {
     },
     staging: {
         client: 'pg',
-        connection: 'postgres://root:root@boilerplate-v2-postgres:5432/boilerplate-v2',
+        connection: 'postgres://root:root@boilerplate-v2-postgres:5432/boilerplate-v3',
         migrations: {
             directory: path.join(BASE_PATH, 'migrations'), 
         },
@@ -40,7 +40,7 @@ const knexConfig = {
     },
     test: {
         client: 'pg',
-        connection: 'postgres://root:root@127.0.0.1:5432/boilerplate-v2-test',
+        connection: 'postgres://root:root@127.0.0.1:5432/boilerplate-v3-test',
         migrations: {
             directory: path.join(BASE_PATH, 'migrations'), 
         },
