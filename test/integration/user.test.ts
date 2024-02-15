@@ -35,6 +35,10 @@ describe('POST /api/v1/user', () => {
       const info = res.body
       const expected = ['status', 'data']
       expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+      expect(info.status).toBe('success')
+      expect(info.data.id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+      expect(info.data.email).toMatch(/^\S+@\S+\.\S+$/)
+      expect(info.data.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
   })
 })
 
