@@ -11,6 +11,35 @@ afterAll(async () => {
 
 let dummy: any
 
+
+
+
+
+describe('POST /api/v1/login', () => {
+    
+  beforeEach(async() => {
+      return await knex.migrate.rollback()
+      .then(async () => {return await knex.migrate.latest()})
+    })
+  
+    afterEach(async () => {
+      return await knex.migrate.rollback()
+    })
+  
+    it('Should login user', async () => {
+        const request = supertest(server)
+        const res = await request
+        .post(`/api/v1/login`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+    })
+  })
+
+
+
+
+
+
 describe('POST /api/v1/user', () => {
     
   beforeEach(async() => {
