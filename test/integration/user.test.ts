@@ -22,8 +22,14 @@ describe('POST /api/v1/user', () => {
   
     it('Should register user', async () => {
       const request = supertest(server)
+      const userData = {
+        name:  'Fake name',
+        email: 'fake@email.com',
+        password: 'Fake password'
+      }
       const res = await request
       .post(`/api/v1/user`)
+      .send(userData)
       .expect('Content-Type', /json/)
       .expect(200)
   })

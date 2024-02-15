@@ -10,7 +10,8 @@ export async function signUp(ctx: IContext){
         name: ctx.request.body.name,
         password: ctx.request.body.password
     }
-    
+
+   
     ctx.body = {
         status: 'success',
         data: input
