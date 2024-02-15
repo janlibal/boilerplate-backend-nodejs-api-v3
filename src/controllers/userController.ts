@@ -6,6 +6,27 @@ import userOperations from "../operations/userOperations"
 
 
 
+export async function signIn(ctx: IContext){
+
+    const input: IUser = {
+        email: ctx.request.body.email,
+        password: ctx.request.body.password
+    }
+
+    validate(schema.signIn, input)
+
+    const user = await userOperations.login(input)
+
+
+    ctx.body = {
+        status: 'success',
+        data: user
+    }
+
+}
+
+
+
 export async function signUp(ctx: IContext){
 
     const input:IUser = {

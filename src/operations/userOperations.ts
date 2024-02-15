@@ -6,6 +6,39 @@ import userRepository from "../repositories/userRepository"
 
 
 
+async function login(input: IUser) {
+
+    logger.info('login started')
+  
+    const data = {
+        email: input.email.toLowerCase(),
+        password: input.password
+    }
+      
+    const user = await userRepository.findByEmail(data.email)
+  
+    if (!user) {
+        logger.info('Unauthorized')
+        throw new errors.Unauthorized()
+    }
+  
+    const verified = await crypto.comparePasswords(data.password, user.password)
+  
+    if (!verified) {
+        logger.info('Unauthorized')
+        throw new errors.Unauthorized()
+    }
+  
+    const token = await crypto.generateAccessToken(user.id)
+  
+    logger.info({email: user.email, token: token}, 'login finished')
+  
+    return {
+        email: user.email,
+        token,
+      }
+    }
+
 async function create(input: IUser) {
     
     logger.info('create user started')
@@ -39,5 +72,6 @@ async function create(input: IUser) {
 
 
 export default { 
-    create
+    create,
+    login
 }

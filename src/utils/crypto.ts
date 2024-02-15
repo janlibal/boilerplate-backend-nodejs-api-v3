@@ -9,6 +9,10 @@ const signOptions: SignOptions = {
     issuer: `${config.auth.createOptions.issuer}.${config.server.environment}`
 }
 
+function comparePasswords(candidatePassword:string, userPassword:string) {
+    return bcrypt.compare(peperify(candidatePassword), userPassword)
+}
+
 function hashPassword(password: string) {
     return bcrypt.hash(peperify(password), config.auth.saltRounds)
 }
@@ -27,5 +31,6 @@ function peperify(password: string) {
 
 export default {
     generateAccessToken,
-    hashPassword
+    hashPassword,
+    comparePasswords
 }

@@ -1,7 +1,7 @@
 import supertest from 'supertest'
 import { knex } from '../../src/database'
 import app from '../../src/utils/app'
-import { testUser } from '../../src/utils/helpers'
+import { createDummy, testUser } from '../../src/utils/helpers'
 
 const server = app.listen()
 
@@ -20,6 +20,7 @@ describe('POST /api/v1/login', () => {
   beforeEach(async() => {
       return await knex.migrate.rollback()
       .then(async () => {return await knex.migrate.latest()})
+      .then(async () => { dummy = await createDummy() })
     })
   
     afterEach(async () => {
@@ -28,10 +29,22 @@ describe('POST /api/v1/login', () => {
   
     it('Should login user', async () => {
         const request = supertest(server)
+        const userData = {
+          email: await dummy.email, 
+          password: 'Password123!'
+        }
         const res = await request
         .post(`/api/v1/login`)
+        .send(userData)
         .expect('Content-Type', /json/)
         .expect(200)
+
+        const info = res.body
+        const expected = ['status', 'data']
+        expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+        expect(info.status).toBe('success')
+        expect(info.data.email).toMatch(/^\S+@\S+\.\S+$/)
+        expect(info.data.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
     })
   })
 
