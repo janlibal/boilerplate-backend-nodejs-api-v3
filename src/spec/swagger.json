@@ -2,11 +2,11 @@
     "swagger": "2.0",
     "info": {
         "description": "Boilerplate API is a simple RESTful API boilerplate project. For this sample, you can use the api key `special-key` to test the authorization filters.",
-        "version": "1.0.6",
-        "title": "Boilerplate v2",
+        "version": "3.0.0",
+        "title": "Boilerplate v3",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
-            "email": "apiteam@swagger.io"
+            "email": "jan.libal@libaldesign.com"
         },
         "license": {
             "name": "Apache 2.0",
@@ -20,8 +20,8 @@
             "name": "user",
             "description": "Operations about user",
             "externalDocs": {
-                "description": "Find out more about our store",
-                "url": "http://swagger.io"
+                "description": "Find out more about this boilerplate",
+                "url": "https://github.com/janlibal/boilerplate-backend-nodejs-api-v3"
             }
         }
     ],

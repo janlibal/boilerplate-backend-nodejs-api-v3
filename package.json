@@ -19,7 +19,17 @@
     "lint:check": "eslint --ext ts --report-unused-disable-directives .",
     "test": "cross-env ENV_FILE=./src/config/env/.env.test jest --detectOpenHandles"
   },
-  "author": "Jan Libal",
+  "homepage": "https://github.com/janlibal/boilerplate-backend-nodejs-api-v3",
+  "author": {
+    "name": "Jan Libal",
+    "email": "jan.libal@yahoo.com"
+  },
+  "contributors": [
+    {
+      "name": "Jan Libal",
+      "email": "jan.libal@yahoo.com"
+    }
+  ],
   "license": "ISC",
   "devDependencies": {
     "@ngneat/falso": "^7.1.1",
