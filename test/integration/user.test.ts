@@ -49,11 +49,7 @@ describe('POST /api/v1/login', () => {
   })
 
 
-
-
-
-
-describe('POST /api/v1/user', () => {
+  describe('POST /api/v1/user', () => {
     
   beforeEach(async() => {
     return await knex.migrate.rollback()
@@ -83,6 +79,5 @@ describe('POST /api/v1/user', () => {
     expect(info.status).toBe('success')
     expect(info.data.email).toMatch(/^\S+@\S+\.\S+$/)
     expect(info.data.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
+  })
 })
-})
-
