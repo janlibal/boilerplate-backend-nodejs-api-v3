@@ -35,7 +35,7 @@ app.use(
 app.use(
   bodyParser({
     enableTypes: ["json"],
-    jsonLimit: '0mb'
+    jsonLimit: '10mb'
   }),
 )
 app.use(koaHelmet())
