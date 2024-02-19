@@ -18,7 +18,9 @@ test('.env | App Definition', async () => {
 
     expect(!!config.server.cors.origin).toBeDefined()
     expect(!!config.server.cors.exposeHeaders).toBeDefined()
-
+    expect(!!config.server.cors.allowedHeaders).toBeDefined()
+    expect(!!config.server.cors.allowedMethods).toBeDefined()
+    
     expect(!!config.auth.secret).toBeDefined()
     expect(!!config.auth.saltRounds).toBeDefined()
     expect(!!config.auth.createOptions.expiresIn).toBeDefined()
