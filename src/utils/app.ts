@@ -9,6 +9,7 @@ import errorHandler from '../middleware/errorHandler'
 import router from '../routes'
 import { koaSwagger } from 'koa2-swagger-ui'
 import fs from 'fs'
+import config from '../config'
 
 
 const app = new Koa()

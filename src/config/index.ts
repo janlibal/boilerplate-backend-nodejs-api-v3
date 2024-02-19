@@ -34,7 +34,9 @@ const config: IConfig = {
           },
         cors: {
             origin: parsedEnv.ORIGIN as string,
-            exposeHeaders: parsedEnv.EXPOSE_HEADERS as []
+            exposeHeaders: parsedEnv.EXPOSE_HEADERS as [],
+            allowedMethods: parsedEnv.EXPOSE_HEADERS as [],
+            allowedHeaders: parsedEnv.EXPOSE_HEADERS as []
         }
     },
     auth: {

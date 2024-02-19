@@ -15,6 +15,8 @@ export interface IConfig {
             cors: {
                 origin: string,
                 exposeHeaders: []
+                allowedHeaders: []
+                allowedMethods: []
             }
         }
         database: {
