@@ -18,7 +18,12 @@ app.use(errorHandler)
 app.use(koaCompress())
 app.use(koaBody())
 app.use(koaLogger())
-app.use(cors())
+app.use(cors({
+  origin: config.server.cors.origin,
+  allowMethods: config.server.cors.allowedMethods,
+  allowHeaders: config.server.cors.allowedHeaders,
+  exposeHeaders: config.server.cors.exposeHeaders
+}))
 app.use(
   koaSwagger({
     routePrefix: '/swagger',
