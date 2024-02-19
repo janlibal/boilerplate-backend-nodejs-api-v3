@@ -55,6 +55,14 @@ export class RequestValidationErrors extends BadRequest {
   }
 }
 
+export class InvalidRequestBodyFormat extends Forbidden {
+  name = 'InvalidRequestBodyFormat'
+  constructor() {
+      super('Invalid format is detected in the request body')
+  }
+}
+
+
 export class InvalidToken extends Forbidden {
   name = 'InvalidToken'
   constructor() {
