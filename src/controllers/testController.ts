@@ -4,7 +4,7 @@ import { IContext } from '../interfaces/IContext'
 import logger from '../utils/logger'
 
 
-export function getApiInfo(ctx: IContext){
+export async function getApiInfo(ctx: IContext){
 
   const environments = {
     nodeVersion: process.versions['node'],
@@ -19,10 +19,13 @@ export function getApiInfo(ctx: IContext){
     environments
   }
 
-  ctx.body = {
-    status: 'success',
+  ctx.status = 200
+  ctx.body = data
+
+  /*ctx.body = {
+    status: ctx.status,
     message: data
-  }
+  }*/
 
   logger.info('Test route works.')
 }

@@ -19,23 +19,26 @@ async function login(input: IUser) {
   
     if (!user) {
         logger.info('Unauthorized')
-        throw new errors.Unauthorized()
+        throw new errors.UnauthorizedError('Invalid email or password')
+        //throw new errors.Unauthorized('Invalid email or password')
     }
   
     const verified = await crypto.comparePasswords(data.password, user.password)
   
     if (!verified) {
         logger.info('Unauthorized')
-        throw new errors.Unauthorized()
+        throw new errors.UnauthorizedError('Invalid email or password')
+        //throw new errors.Unauthorized()
     }
   
     const token = await crypto.generateAccessToken(user.id)
+    
   
     logger.info({email: user.email, token: token}, 'login finished')
   
     return {
         email: user.email,
-        token,
+        token
       }
     }
 

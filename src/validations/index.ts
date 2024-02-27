@@ -2,7 +2,7 @@ import jsonschema from 'jsonschema'
 import * as errors from '../utils/errors'
 import logger from '../utils/logger'
 
-function validate(schema:any, inputData:any) {
+async function validate(schema:any, inputData:any) {
   const validator = new jsonschema.Validator()
   schema.additionalProperties = false
   const validationErrors = validator.validate(inputData, schema).errors

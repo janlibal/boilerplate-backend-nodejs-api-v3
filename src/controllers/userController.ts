@@ -13,14 +13,13 @@ export async function signIn(ctx: IContext){
         password: ctx.request.body.password
     }
 
-    validate(schema.signIn, input)
+    await validate(schema.signIn, input)
 
     const user = await userOperations.login(input)
 
-
     ctx.body = {
-        status: 'success',
-        data: user
+        status: ctx.status,
+        data: user,
     }
 
 }
@@ -35,7 +34,7 @@ export async function signUp(ctx: IContext){
         password: ctx.request.body.password
     }
 
-    validate(schema.signUp, input)
+    await validate(schema.signUp, input)
 
     const user = await userOperations.create(input)
 
