@@ -20,11 +20,6 @@ export async function signIn(ctx: IContext){
     ctx.status = 200
     ctx.body = user
 
-    /*ctx.body = {
-        status: ctx.status,
-        data: user,
-    }*/
-
 }
 
 
@@ -44,11 +39,5 @@ export async function signUp(ctx: IContext){
 
     ctx.status = 201
     ctx.body = user
-
-
-    /*ctx.body = {
-        status: 'success',
-        data: user
-    }*/
 
 }
