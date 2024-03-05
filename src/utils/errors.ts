@@ -135,6 +135,13 @@ export class RequestValidationErrors extends BadRequest {
   }
 }
 
+export class RequestValidationErrorsNew extends Forbidden {
+  name = 'InvalidRequestBodyFormat'
+  type = 'INVALID_BODY_FORMAT'
+  status = 400
+  expose = false
+}
+
 export class InvalidRequestBodyFormat extends Forbidden {
   name = 'InvalidRequestBodyFormat'
   constructor() {
