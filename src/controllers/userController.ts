@@ -17,10 +17,13 @@ export async function signIn(ctx: IContext){
 
     const user = await userOperations.login(input)
 
-    ctx.body = {
+    ctx.status = 200
+    ctx.body = user
+
+    /*ctx.body = {
         status: ctx.status,
         data: user,
-    }
+    }*/
 
 }
 
@@ -38,9 +41,14 @@ export async function signUp(ctx: IContext){
 
     const user = await userOperations.create(input)
 
-    ctx.body = {
+
+    ctx.status = 201
+    ctx.body = user
+
+
+    /*ctx.body = {
         status: 'success',
         data: user
-    }
+    }*/
 
 }

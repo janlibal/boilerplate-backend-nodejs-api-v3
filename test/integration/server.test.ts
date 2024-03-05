@@ -17,17 +17,20 @@ describe('GET /', () => {
           .get('/')
           .expect('Content-Type', /json/)
           .expect(200)
-  
+ 
+          
+
         const info = res.body
-        const expected = ['status', 'message']
-        expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
-        expect(info.status).toBe('success')
-        expect(info.message.name).toBe(pkg.name)
-        expect(info.message.version).toBe(pkg.version)
-        expect(info.message.description).toBe(pkg.description)
-        expect(info.message.environments).toBeInstanceOf(Object)
+        const status = res.status
+        //const expected = ['status', 'message']
+        //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+        expect(status).toBe(200)
+        expect(info.name).toBe(pkg.name)
+        expect(info.version).toBe(pkg.version)
+        expect(info.description).toBe(pkg.description)
+        expect(info.environments).toBeInstanceOf(Object)
   
-        const environments = info.message.environments
+        const environments = info.environments
         expect(environments.hostname).toBe(os.hostname())
         expect(environments.nodeVersion).toBe(process.versions['node'])
         expect(environments.platform).toBe(`${process.platform}/${process.arch}`)

@@ -13,8 +13,6 @@ let dummy: any
 
 
 
-
-
 describe('POST /api/v1/login', () => {
     
   beforeEach(async() => {
@@ -40,11 +38,12 @@ describe('POST /api/v1/login', () => {
         .expect(200)
 
         const info = res.body
-        const expected = ['status', 'data']
-        expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
-        expect(info.status).toBe('success')
-        expect(info.data.email).toMatch(/^\S+@\S+\.\S+$/)
-        expect(info.data.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
+        const status = res.status
+        //const expected = ['status', 'data']
+        //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+        expect(status).toBe(200)
+        expect(info.email).toMatch(/^\S+@\S+\.\S+$/)
+        expect(info.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
     })
   })
 
@@ -71,13 +70,14 @@ describe('POST /api/v1/login', () => {
     .post(`/api/v1/user`)
     .send(userData)
     .expect('Content-Type', /json/)
-    .expect(200)
+    .expect(201)
 
     const info = res.body
-    const expected = ['status', 'data']
-    expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
-    expect(info.status).toBe('success')
-    expect(info.data.email).toMatch(/^\S+@\S+\.\S+$/)
-    expect(info.data.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(201)
+    expect(info.email).toMatch(/^\S+@\S+\.\S+$/)
+    expect(info.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
   })
 })

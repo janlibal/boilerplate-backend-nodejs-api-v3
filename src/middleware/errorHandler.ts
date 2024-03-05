@@ -14,9 +14,6 @@ async function errorHandler(ctx: IContext, next: () => Promise<any>) {
  
       } catch (error: any) {
 
-
-        console.log('ctx.status: ' + ctx.status)
-
         const stack = error.stack ? error.stack.split('\n') : error.stack
         
         const isDevelopment = ['development', 'test', 'staging', 'production'].includes(config.server.environment)

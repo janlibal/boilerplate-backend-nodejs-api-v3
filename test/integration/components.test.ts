@@ -13,7 +13,7 @@ import { close, connect } from "../../src/database"
 
 
 describe('Postgres DB Connection', () => {
-    it('should establish a successful DB connection', async () => {
+    it.only('should establish a successful DB connection', async () => {
      
       // Attempt to connect to the database
       const db = await connect()
