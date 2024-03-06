@@ -25,7 +25,7 @@ describe('POST /api/v1/login', () => {
       return await knex.migrate.rollback()
     })
   
-    it('LOGIN: Should login user', async () => {
+    it('1. LOGIN: Should login user', async () => {
         const request = supertest(server)
         const userData = {
           email: await dummy.email, 
@@ -46,7 +46,7 @@ describe('POST /api/v1/login', () => {
         expect(info.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
     })
 
-    it('LOGIN: returns 401 for wrong username', async () => {
+    it('2. LOGIN: returns 401 for wrong username', async () => {
       const request = supertest(server)
       const userData = {
         email: 'unknownuser@domain.com', //await dummy.email, 
@@ -71,10 +71,10 @@ describe('POST /api/v1/login', () => {
       
   })
 
-  it('LOGIN: returns 401 for wrong password', async () => {
+  it('3. LOGIN: returns 401 for wrong password', async () => {
     const request = supertest(server)
     const userData = {
-      email: await dummy.email, 
+      email: 'jan.libal@libaldesign.com', //await dummy.email, 
       password: 'abcdefgh130!'
     }
     const res = await request
@@ -96,7 +96,7 @@ describe('POST /api/v1/login', () => {
     
   })
 
-  it('LOGIN: returns 400 for wrong email format', async () => {
+  it('4. LOGIN: returns 400 for wrong email format', async () => {
     const request = supertest(server)
     const userData = {
       email: 'joedoedomain.com', 
@@ -123,10 +123,10 @@ describe('POST /api/v1/login', () => {
   })
 
 
-  it('LOGIN: returns 400 for password being too short', async () => {
+  it('5. LOGIN: returns 400 for password being too short', async () => {
     const request = supertest(server)
     const userData = {
-      email: await dummy.email, 
+      email: 'jan.libal@libaldesign.com', //await dummy.email, 
       password: 'Pass'
     }
     const res = await request
@@ -165,12 +165,12 @@ describe('POST /api/v1/login', () => {
     return await knex.migrate.rollback()
   })
   
-  it('Should register user', async () => {
+  it('6. REGISTER: Should register user', async () => {
     const request = supertest(server)
     const userData = {
-      name: testUser.name,
-      email: testUser.email,
-      password: testUser.password
+      name: 'Jan Libal', //testUser.name,
+      email: 'jan.libal@libaldesign.com', //testUser.email,
+      password: 'Password.123!' //testUser.password
     }
     const res = await request
     .post(`/api/v1/user`)
@@ -186,4 +186,225 @@ describe('POST /api/v1/login', () => {
     expect(info.email).toMatch(/^\S+@\S+\.\S+$/)
     expect(info.token).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
   })
+
+
+  it('7. REGISTER: returns 400 for missing name', async () => {
+    const request = supertest(server)
+    const userData = {
+      //name: testUser.name,
+      email: 'jan.libal@libaldesign.com', //testUser.email,
+      password: 'Password.123!' //testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.name is required')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.name is required/i)
+  })
+
+
+  it('8. REGISTER: returns 400 for missing email', async () => {
+    const request = supertest(server)
+    const userData = {
+      name: 'Jan Libal', //testUser.name,
+      //email: testUser.email,
+      password: 'Passowrd.123!' //testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.email is required')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.email is required/i)
+  })
+
+
+  it('9. REGISTER: returns 400 for missing password', async () => {
+    const request = supertest(server)
+    const userData = {
+      name: 'Jan Libal', //testUser.name,
+      email: 'jan.libal@libaldesign.com' //testUser.email,
+      //password: testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.password is required')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.password is required/i)
+  })
+
+
+  it('10. REGISTER: returns 400 for missing name and email', async () => {
+    const request = supertest(server)
+    const userData = {
+      //name: testUser.name,
+      //email: testUser.email,
+      password: 'Password.123!' //testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.name is required,instance.email is required')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.name is required,instance.email is required/i)
+  })
+
+  it('11. REGISTER: returns 400 for missing name and password', async () => {
+    const request = supertest(server)
+    const userData = {
+      //name: testUser.name,
+      email: 'jan.libal@libaldesign.com' //testUser.email,
+      //password: testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.name is required,instance.password is required')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.name is required,instance.password is required/i)
+    
+  })
+
+
+  it('12. REGISTER: returns 400 for missing email and password', async () => {
+    const request = supertest(server)
+    const userData = {
+      name: 'Jan Libal', //testUser.name,
+      //email: 'jan.libal@libaldesign.com' //testUser.email,
+      //password: testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.email is required,instance.password is required')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.email is required,instance.password is required/i)
+    
+  })
+
+  it('13. REGISTER: returns 400 for missing email and name', async () => {
+    const request = supertest(server)
+    const userData = {
+      //name: testUser.name,
+      //email: 'jan.libal@libaldesign.com' //testUser.email,
+      password: testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.name is required,instance.email is required')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.name is required,instance.email is required/i)
+    
+  })
+
+
+
+  it('REGISTER: User already exists', async () => {
+    const request = supertest(server)
+    const userData = {
+      name: 'Jan Libal',
+      email: 'jan.libal@libaldesign.com', //testUser.email,
+      password: testUser.password
+    }
+
+    const createUser = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    /*.expect('Content-Type', /json/)
+    .expect(200)*/
+
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(409)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(409)
+    expect(info.status).toBe(409)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('RESOURCE_ALREADY_EXISTS')
+    expect(info.message).toMatch('User already registered')
+    expect(info.stack).toMatch(/ResourceAlreadyExists: User already registered/i)
+    
+    
+  })
+
+
 })

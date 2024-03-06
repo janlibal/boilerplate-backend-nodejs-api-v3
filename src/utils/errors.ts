@@ -114,6 +114,14 @@ export class InternalServerError extends Error {
   expose = false
 }
 
+
+export class ResourceAlreadyExistsNew extends Forbidden {
+  name = 'ResourceAlreadyExists'
+  type = 'RESOURCE_ALREADY_EXISTS'
+  status = 409
+  expose = false
+}
+
 export class ResourceAlreadyExists extends Conflict {
   name = 'ResourceAlreadyExists'
   constructor() {

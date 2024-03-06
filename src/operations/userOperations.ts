@@ -56,7 +56,7 @@ async function create(input: IUser) {
         
     if (user) {
       logger.info('Resource already exists')
-      throw new errors.ResourceAlreadyExists()
+      throw new errors.ResourceAlreadyExistsNew('User already registered')
     }
 
     let createdUser: any
