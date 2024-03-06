@@ -115,14 +115,21 @@ export class InternalServerError extends Error {
 }
 
 
-export class ResourceAlreadyExistsNew extends Forbidden {
+export class ResourceAlreadyExists extends Forbidden {
   name = 'ResourceAlreadyExists'
   type = 'RESOURCE_ALREADY_EXISTS'
   status = 409
   expose = false
 }
 
-export class ResourceAlreadyExists extends Conflict {
+export class RequestValidationErrors extends Forbidden {
+  name = 'InvalidRequestBodyFormat'
+  type = 'INVALID_BODY_FORMAT'
+  status = 400
+  expose = false
+}
+
+export class ResourceAlreadyExistsOld extends Conflict {
   name = 'ResourceAlreadyExists'
   constructor() {
       super('Resource already exists')
@@ -136,19 +143,14 @@ export class ResourceNotFound extends NotFound {
   }
 }
 
-export class RequestValidationErrors extends BadRequest {
+export class RequestValidationErrorsOld extends BadRequest {
   name = 'RequestValidationErrors'
   constructor(errorMessage: string) {
       super(`Request Validation Errors: ${errorMessage}`)
   }
 }
 
-export class RequestValidationErrorsNew extends Forbidden {
-  name = 'InvalidRequestBodyFormat'
-  type = 'INVALID_BODY_FORMAT'
-  status = 400
-  expose = false
-}
+
 
 export class InvalidRequestBodyFormat extends Forbidden {
   name = 'InvalidRequestBodyFormat'

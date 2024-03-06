@@ -9,8 +9,8 @@ async function validate(schema:any, inputData:any) {
   if (validationErrors.length > 0) {
     //logger.info(new errors.RequestValidationErrors(validationErrors.toString()))
     //throw new errors.RequestValidationErrors(validationErrors.toString())
-    logger.info(new errors.RequestValidationErrorsNew(validationErrors.toString()))
-    throw new errors.RequestValidationErrorsNew(validationErrors.toString())
+    logger.info(new errors.RequestValidationErrors(validationErrors.toString()))
+    throw new errors.RequestValidationErrors(validationErrors.toString())
   }
 }
 
