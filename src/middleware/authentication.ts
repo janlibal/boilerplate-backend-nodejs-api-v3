@@ -10,7 +10,6 @@ import logger from "../utils/logger"
 
 
 
-
 export async function authenticate(ctx:IContext, next:Next) {
 
   if (!ctx.header.authorization) {
@@ -19,6 +18,7 @@ export async function authenticate(ctx:IContext, next:Next) {
   }
 
   const jwtToken = ctx.header.authorization!
+  
    
   ctx.state.userId = jwtToken
 
