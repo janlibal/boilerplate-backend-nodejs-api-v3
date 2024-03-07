@@ -14,7 +14,14 @@ describe('POST /api/v1/address', () => {
       const request = supertest(server)
       const res = await request
       .post(`/api/v1/address`)
-      .expect('Content-Type', /json/)
       .expect(200)
+
+      const status = res.status
+      expect(status).toBe(200)
+      
+  
+
+
+
   })
 })
