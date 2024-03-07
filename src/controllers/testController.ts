@@ -22,10 +22,6 @@ export async function getApiInfo(ctx: IContext){
   ctx.status = 200
   ctx.body = data
 
-  /*ctx.body = {
-    status: ctx.status,
-    message: data
-  }*/
 
   logger.info('Test route works.')
 }
