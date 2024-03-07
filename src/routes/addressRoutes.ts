@@ -5,5 +5,4 @@ const router = new Router()
 
 router.post('/address', address)
 
-
 export default router.routes()
