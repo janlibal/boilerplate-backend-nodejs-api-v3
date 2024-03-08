@@ -9,6 +9,8 @@ const signOptions: SignOptions = {
     issuer: `${config.auth.createOptions.issuer}.${config.server.environment}`
 }
 
+
+
 async function comparePasswords(candidatePassword:string, userPassword:string) {
     return bcrypt.compare(peperify(candidatePassword), userPassword)
 }
@@ -27,6 +29,8 @@ function peperify(password: string) {
       .update(password)
       .digest('hex')
 }
+
+
 
 
 export default {

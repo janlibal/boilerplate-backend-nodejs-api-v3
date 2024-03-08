@@ -24,23 +24,21 @@ describe('Headers tests', () => {
       expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
       expect(info.message).toMatch('No authorization defined')
       expect(info.stack).toMatch(/Error: No authorization defined/i)
+    })
 
+    it('2. AUTHORIZATION: Should return 403 for invalid token', async () => {
+      const request = supertest(server)
+      const res = await request
+      .post(`/api/v1/address`)
+      .set('Authorization', token)
+      .expect(403)
+
+      const info = res.body
+      const status = res.status
+      expect(status).toBe(403)
+      expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+      expect(info.status).toBe(403)
+      expect(info.message).toMatch('Invalid Token')
+      expect(info.stack).toMatch(/InvalidToken: Invalid Token/i)
   })
-
-  it('2. AUTHORIZATION: Should return 403 for invalid token', async () => {
-    const request = supertest(server)
-    const res = await request
-    .post(`/api/v1/address`)
-    .set('Authorization', token)
-    .expect(403)
-
-    const info = res.body
-    const status = res.status
-    expect(status).toBe(403)
-    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
-    expect(info.status).toBe(403)
-    expect(info.message).toMatch('Invalid Token')
-    expect(info.stack).toMatch(/InvalidToken: Invalid Token/i)
-
-})
 })

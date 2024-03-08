@@ -24,13 +24,21 @@ async function parseHeader(hdrValue:string) {
 }
 
 
-
-
 async function getAuthPayload(authorization:string) {
   
-  const data = await parseHeader(authorization)
+  const parsedHeader = await parseHeader(authorization)
+  
+  if (!parsedHeader
+    || !parsedHeader.value
+    || !parsedHeader.scheme
+    //|| parsedHeader.scheme.toLowerCase() !== 'jwt'
+    || parsedHeader.value.toLowerCase() !== 'jwt' 
+  ) {
+    return null
+  }
+ 
       
-  return data
+  return parseHeader
    
  }
 
