@@ -73,10 +73,34 @@ async function create(input: IUser) {
     
 }
 
+async function verifyTokenPayload(token:string) {
+    logger.info({ token }, 'verifyTokenPayload started')
+    
+    let jwtPayload:any
+    jwtPayload = await crypto.verifyToken(token)
+    
+    const now = Date.now()
+    if (!jwtPayload || !jwtPayload.exp || now >= jwtPayload.exp * 1000) {
+      throw new errors.Unauthorized()
+    }
+  
+    const userId = jwtPayload.userId
+    const user = await userRepository.findById(userId)
+    if (!user) {
+      throw new errors.Unauthorized()
+    }
+    logger.info('verifyTokenPayload finished')
+
+    return {
+      user,
+      loginTimeout: jwtPayload.exp * 1000,
+    }
+  }
 
 
 
 export default { 
     create,
-    login
+    login,
+    verifyTokenPayload
 }
