@@ -63,8 +63,13 @@ export async function authenticate(ctx:IContext, next:Next) {
     throw new errors.InvalidToken()
   }
 
-   
-  ctx.state.userId = jwtToken
+
+  if (ctx.response && data.loginTimeout) {
+    ctx.set('Login-timeout', data.loginTimeout.toString())
+  }
+
+  ctx.state.user = data
+  ctx.state.userId = data.user.id
 
   return next()
 }
