@@ -36,8 +36,12 @@ async function getAuthPayload(authorization:string) {
   ) {
     return null
   }
+
+  const token = parsedHeader.scheme.replace('jwt ', '')
+
+  await validate(schema.jwtToken, token)
+  
  
-      
   return parseHeader
    
  }
