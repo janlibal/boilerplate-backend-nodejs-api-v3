@@ -9,6 +9,10 @@ const signOptions: SignOptions = {
     issuer: `${config.auth.createOptions.issuer}.${config.server.environment}`
 }
 
+const verifyOptions: VerifyOptions = {
+    algorithms: [config.auth.createOptions.algorithm],
+    issuer: `${config.auth.createOptions.issuer}.${config.server.environment}`,
+}
 
 
 async function comparePasswords(candidatePassword:string, userPassword:string) {
@@ -30,10 +34,21 @@ function peperify(password: string) {
       .digest('hex')
 }
 
-
+async function verifyToken(token: string) {
+    try {
+        const data = await jwt.verify(token, config.auth.secret, verifyOptions)
+        return data
+    } catch (err) {
+        if (err instanceof jwt.JsonWebTokenError || err instanceof SyntaxError) {
+            return null
+        }
+    throw err
+    }
+}
 
 
 export default {
+    verifyToken,
     generateAccessToken,
     hashPassword,
     comparePasswords
