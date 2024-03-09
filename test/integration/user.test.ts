@@ -149,6 +149,85 @@ describe('POST /api/v1/login', () => {
     
   })
 
+
+  it('6. LOGIN: returns 400 for email being invalid type', async () => {
+    const request = supertest(server)
+    const userData = {
+      email: 123,
+      password: 'Pass'
+    }
+    const res = await request
+    .post(`/api/v1/login`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.email is not of a type\(s\) string')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.email is not of a type\(s\) string/i)
+    
+  })
+
+  it('7. LOGIN: returns 400 for password being invalid type', async () => {
+    const request = supertest(server)
+    const userData = {
+      email: 'jan.libal@libaldesign.com',
+      password: 132
+    }
+    const res = await request
+    .post(`/api/v1/login`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.password is not of a type\(s\) string')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.password is not of a type\(s\) string/i)
+    
+  })
+
+  it('8. LOGIN: returns 400 for email,password being invalid type', async () => {
+    const request = supertest(server)
+    const userData = {
+      email: 132,
+      password: 132
+    }
+    const res = await request
+    .post(`/api/v1/login`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.email is not of a type\(s\) string,instance.password is not of a type\(s\) string')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.email is not of a type\(s\) string,instance.password is not of a type\(s\) string/i)
+    
+  })
+
 })
 
 
