@@ -1,3 +1,4 @@
+import schema from '../validations/schemas/addressSchema'
 import validate from '../validations'
 import { IContext } from "../interfaces/IContext"
 
@@ -11,7 +12,9 @@ export async function address(ctx: IContext){
         phoneNo: ctx.request.body.phoneNo,
         address: ctx.request.body.address,
     }
-    
+
+    await validate(schema.address, body)
+
     const data = {
         userId: userId
     }
