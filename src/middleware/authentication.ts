@@ -27,7 +27,7 @@ async function parseHeader(hdrValue:string) {
 async function getAuthPayload(authorization:string) {
   
   const parsedHeader = await parseHeader(authorization)
-  
+
   if (!parsedHeader
     || !parsedHeader.value
     || !parsedHeader.scheme
@@ -37,10 +37,11 @@ async function getAuthPayload(authorization:string) {
     return null
   }
 
+
   const token = parsedHeader.scheme.replace('jwt ', '')
 
-  await validate(schema.jwtToken, token)
-  
+  validate(schema.jwtToken, token)
+    
   const data = await userOperations.verifyTokenPayload(token)
       
   return data
@@ -71,6 +72,8 @@ export async function authenticate(ctx:IContext, next:Next) {
   ctx.state.user = data
   ctx.state.userId = data.user.id
 
+  
+  
   return next()
 }
 

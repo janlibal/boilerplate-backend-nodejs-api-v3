@@ -2,8 +2,10 @@ import { IContext } from "../interfaces/IContext"
 
 export async function address(ctx: IContext){
 
+    const userId = ctx.state.userId
+
     const data = {
-        userId: 'eecb5585-68b7-470a-a344-f076b4dc4113'
+        userId: userId
     }
 
     ctx.status = 200

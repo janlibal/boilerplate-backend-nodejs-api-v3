@@ -5,12 +5,15 @@ import { randLastName, randFirstName, randPhoneNumber, randStreetAddress, randEm
 
 
 export async function createDummyAndAuthorize() {
+  
   const pwd = 'Password123!'
+  const name = 'Jan Libal'
+  const email = 'jan.libal@libaldesign.com'
 
-  const firstName = randFirstName()
+  /*const firstName = randFirstName()
   const lastName = randLastName()
   const name = firstName + ' ' + lastName
-  const email = randEmail()
+  const email = randEmail()*/
   
   const dummyUser = {
     name: name,
