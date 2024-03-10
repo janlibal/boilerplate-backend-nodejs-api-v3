@@ -2,6 +2,7 @@ import schema from '../validations/schemas/addressSchema'
 import validate from '../validations'
 import { IContext } from "../interfaces/IContext"
 
+
 export async function address(ctx: IContext){
 
     const userId = ctx.state.userId
@@ -14,6 +15,7 @@ export async function address(ctx: IContext){
     }
 
     await validate(schema.address, body)
+    
 
     const data = {
         userId: userId

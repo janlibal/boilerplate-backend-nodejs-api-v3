@@ -690,3 +690,43 @@ describe('POST /api/v1/address', () => {
 
 
 })
+
+
+describe('Saving Address', () => {
+
+  beforeEach(async() => {
+    return await knex.migrate.rollback()
+    .then(async () => {return await knex.migrate.latest()})
+    .then(async () => { usr = await createDummyAndAuthorize() })
+  })
+
+  afterEach(async () => {
+    return await knex.migrate.rollback()
+  })
+
+  it('26. ADDRESS: Should return 200 for saved contact into Firebase', async () => {
+
+    const contact = {
+      firstName: 'Richard',
+      lastName: 'Mitchell',
+      phoneNo: '+1 (415) 200-0186',
+      address: '1 Post Street, Suite 400. San Francisco, CA 94104.',
+    }
+
+    const request = supertest(server)
+    const res = await request
+    .post(`/api/v1/address`)
+    .set('Authorization', `jwt ${usr.accessToken}`)
+    .send(contact)
+    .expect(200)
+    const info = res.body
+    const status = res.status
+    
+    expect(info._writeTime).toBeInstanceOf(Object)
+
+    const data = info._writeTimes
+    expect(data._seconds).toBe(Number)
+    expect(data._nanoseconds).toBe(Number)
+    
+  })
+})
