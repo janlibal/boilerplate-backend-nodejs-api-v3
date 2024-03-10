@@ -1,6 +1,7 @@
 import schema from '../validations/schemas/addressSchema'
 import validate from '../validations'
 import { IContext } from "../interfaces/IContext"
+import { IContact } from '../interfaces/IContact'
 
 
 export async function address(ctx: IContext){
