@@ -12,3 +12,8 @@ export interface IContactData {
     phoneNo: string,
     address: string
 }
+
+export interface IUserData {
+    fullName: string,
+    userId: string,
+}
