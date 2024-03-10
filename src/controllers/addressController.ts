@@ -2,6 +2,7 @@ import schema from '../validations/schemas/addressSchema'
 import validate from '../validations'
 import { IContext } from "../interfaces/IContext"
 import { IContact } from '../interfaces/IContact'
+import addressOperations from '../operations/addressOperations'
 
 
 export async function address(ctx: IContext){
@@ -16,13 +17,18 @@ export async function address(ctx: IContext){
     }
 
     await validate(schema.address, body)
-    
 
-    const data = {
+    const input: IContact = {
+        firstName: body.firstName,
+        lastName: body.lastName,
+        phoneNo: body.phoneNo,
+        address: body.address,
         userId: userId
     }
 
+    const address = await addressOperations.create(input)
+    
     ctx.status = 200
-    ctx.body = data
+    ctx.body = address
     
 }
