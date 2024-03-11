@@ -81,13 +81,13 @@ async function verifyTokenPayload(token:string) {
     
     const now = Date.now()
     if (!jwtPayload || !jwtPayload.exp || now >= jwtPayload.exp * 1000) {
-      throw new errors.Unauthorized()
+      throw new errors.Unauthorized('Invalid token')
     }
   
     const userId = jwtPayload.userId
     const user = await userRepository.findById(userId)
     if (!user) {
-      throw new errors.Unauthorized()
+      throw new errors.Unauthorized('Invalid user')
     }
     logger.info('verifyTokenPayload finished')
 

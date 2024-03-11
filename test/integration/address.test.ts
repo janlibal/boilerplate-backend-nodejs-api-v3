@@ -704,7 +704,7 @@ describe('Saving Address', () => {
     return await knex.migrate.rollback()
   })
 
-  it('26. ADDRESS: Should return 200 for saved contact into Firebase', async () => {
+  it('26. ADDRESS: Should return 200 for saved contact into Firestore', async () => {
 
     const contact = {
       firstName: 'Richard',
@@ -722,10 +722,10 @@ describe('Saving Address', () => {
     const info = res.body
     const status = res.status
     
-    /*expect(info._writeTime).toBeInstanceOf(Object)
-    const data = info._writeTimes
+    expect(info._writeTime).toBeInstanceOf(Object)
+    const data = info._writeTime
     expect(data._seconds).toBeGreaterThan(10)
-    expect(data._nanoseconds).toBeGreaterThan(10)*/
+    expect(data._nanoseconds).toBeGreaterThan(10)
 
     
   })
