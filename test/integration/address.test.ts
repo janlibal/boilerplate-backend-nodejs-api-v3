@@ -663,7 +663,7 @@ describe('POST /api/v1/address', () => {
     expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.firstName is not of a type\(s\) string,instance.phoneNo is not of a type\(s\) string,instance.address is not of a type\(s\) string/i)
   })
 
-  it('25. ADDRESS schema validation: Should return 400 for lastName, phoneNO, address being invalid type', async () => {
+  it('25. ADDRESS schema validation: Should return 400 for lastName, phoneNo, address being invalid type', async () => {
 
     const contact = {
       firstName: 'Joe',

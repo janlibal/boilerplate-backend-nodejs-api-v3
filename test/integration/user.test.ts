@@ -451,7 +451,7 @@ describe('POST /api/v1/login', () => {
 
 
 
-  it('REGISTER: User already exists', async () => {
+  it('14. REGISTER: User already exists', async () => {
     const request = supertest(server)
     const userData = {
       name: 'Jan Libal',
@@ -484,6 +484,85 @@ describe('POST /api/v1/login', () => {
     
     
   })
+
+
+
+  it('15. REGISTER: returns 400 for name being invalid type', async () => {
+    const request = supertest(server)
+    const userData = {
+      name: 123,
+      email: 'jan.libal@libaldesign.com', //testUser.email,
+      password: testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.name is not of a type\(s\) string')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.name is not of a type\(s\) string/i)
+  })
+
+  it('16. REGISTER: returns 400 for email being invalid type', async () => {
+    const request = supertest(server)
+    const userData = {
+      name: 'Jan Libal',
+      email: 123,
+      password: testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.email is not of a type\(s\) string')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.email is not of a type\(s\) string/i)
+  })
+
+  it('17. REGISTER: returns 400 for name, email being invalid type', async () => {
+    const request = supertest(server)
+    const userData = {
+      name: 123,
+      email: 123,
+      password: testUser.password
+    }
+    const res = await request
+    .post(`/api/v1/user`)
+    .send(userData)
+    .expect('Content-Type', /json/)
+    .expect(400)
+
+    const info = res.body
+    const status = res.status
+    //const expected = ['status', 'data']
+    //expect(Object.keys(info)).toEqual(expect.arrayContaining(expected))
+    expect(status).toBe(400)
+    expect(info.status).toBe(400)
+    expect(info.requestId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+    expect(info.type).toMatch('INVALID_BODY_FORMAT')
+    expect(info.message).toMatch('instance.name is not of a type\(s\) string,instance.email is not of a type\(s\) string')
+    expect(info.stack).toMatch(/InvalidRequestBodyFormat: instance.name is not of a type\(s\) string,instance.email is not of a type\(s\) string/i)
+  })
+
+  
 
 
 })
