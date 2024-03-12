@@ -74,7 +74,7 @@ describe('POST /api/v1/login', () => {
   it('3. LOGIN: returns 401 for wrong password', async () => {
     const request = supertest(server)
     const userData = {
-      email: 'jan.libal@libaldesign.com', //await dummy.email, 
+      email: 'joe.doe@joedoe.com', //await dummy.email, 
       password: 'abcdefgh130!'
     }
     const res = await request
@@ -126,7 +126,7 @@ describe('POST /api/v1/login', () => {
   it('5. LOGIN: returns 400 for password being too short', async () => {
     const request = supertest(server)
     const userData = {
-      email: 'jan.libal@libaldesign.com', //await dummy.email, 
+      email: 'joe.doe@joedoe.com', //await dummy.email, 
       password: 'Pass'
     }
     const res = await request
@@ -179,7 +179,7 @@ describe('POST /api/v1/login', () => {
   it('7. LOGIN: returns 400 for password being invalid type', async () => {
     const request = supertest(server)
     const userData = {
-      email: 'jan.libal@libaldesign.com',
+      email: 'joe.doe@joedoe.com',
       password: 132
     }
     const res = await request
@@ -247,8 +247,8 @@ describe('POST /api/v1/login', () => {
   it('6. REGISTER: Should register user', async () => {
     const request = supertest(server)
     const userData = {
-      name: 'Jan Libal', //testUser.name,
-      email: 'jan.libal@libaldesign.com', //testUser.email,
+      name: 'Joe Doe', //testUser.name,
+      email: 'joe.doe@joedoe.com', //testUser.email,
       password: 'Password.123!' //testUser.password
     }
     const res = await request
@@ -271,7 +271,7 @@ describe('POST /api/v1/login', () => {
     const request = supertest(server)
     const userData = {
       //name: testUser.name,
-      email: 'jan.libal@libaldesign.com', //testUser.email,
+      email: 'joe.doe@joedoe.com', //testUser.email,
       password: 'Password.123!' //testUser.password
     }
     const res = await request
@@ -296,7 +296,7 @@ describe('POST /api/v1/login', () => {
   it('8. REGISTER: returns 400 for missing email', async () => {
     const request = supertest(server)
     const userData = {
-      name: 'Jan Libal', //testUser.name,
+      name: 'Joe Doe', //testUser.name,
       //email: testUser.email,
       password: 'Passowrd.123!' //testUser.password
     }
@@ -322,8 +322,8 @@ describe('POST /api/v1/login', () => {
   it('9. REGISTER: returns 400 for missing password', async () => {
     const request = supertest(server)
     const userData = {
-      name: 'Jan Libal', //testUser.name,
-      email: 'jan.libal@libaldesign.com' //testUser.email,
+      name: 'Joe Doe', //testUser.name,
+      email: 'joe.doe@joedoe.com' //testUser.email,
       //password: testUser.password
     }
     const res = await request
@@ -374,7 +374,7 @@ describe('POST /api/v1/login', () => {
     const request = supertest(server)
     const userData = {
       //name: testUser.name,
-      email: 'jan.libal@libaldesign.com' //testUser.email,
+      email: 'joe.doe@joedoe.com' //testUser.email,
       //password: testUser.password
     }
     const res = await request
@@ -400,8 +400,8 @@ describe('POST /api/v1/login', () => {
   it('12. REGISTER: returns 400 for missing email and password', async () => {
     const request = supertest(server)
     const userData = {
-      name: 'Jan Libal', //testUser.name,
-      //email: 'jan.libal@libaldesign.com' //testUser.email,
+      name: 'Joe Doe', //testUser.name,
+      //email: 'joe.doe@joedoe.com' //testUser.email,
       //password: testUser.password
     }
     const res = await request
@@ -427,7 +427,7 @@ describe('POST /api/v1/login', () => {
     const request = supertest(server)
     const userData = {
       //name: testUser.name,
-      //email: 'jan.libal@libaldesign.com' //testUser.email,
+      //email: 'joe.doe@joedoe.com' //testUser.email,
       password: testUser.password
     }
     const res = await request
@@ -454,8 +454,8 @@ describe('POST /api/v1/login', () => {
   it('14. REGISTER: User already exists', async () => {
     const request = supertest(server)
     const userData = {
-      name: 'Jan Libal',
-      email: 'jan.libal@libaldesign.com', //testUser.email,
+      name: 'Joe Doe',
+      email: 'joe.doe@joedoe.com', //testUser.email,
       password: testUser.password
     }
 
@@ -491,7 +491,7 @@ describe('POST /api/v1/login', () => {
     const request = supertest(server)
     const userData = {
       name: 123,
-      email: 'jan.libal@libaldesign.com', //testUser.email,
+      email: 'joe.doe@joedoe.com', //testUser.email,
       password: testUser.password
     }
     const res = await request
@@ -515,7 +515,7 @@ describe('POST /api/v1/login', () => {
   it('16. REGISTER: returns 400 for email being invalid type', async () => {
     const request = supertest(server)
     const userData = {
-      name: 'Jan Libal',
+      name: 'Joe Doe',
       email: 123,
       password: testUser.password
     }
